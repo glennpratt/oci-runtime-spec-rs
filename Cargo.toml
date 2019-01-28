@@ -1,9 +1,9 @@
 [package]
 name = "oci-runtime-spec"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Glenn Pratt <glennpratt@gmail.com>"]
 edition = "2018"
-description = "OCI Runtime Spec serde types for Rest translated from JSON Schema by QuickType."
+description = "OCI Runtime Spec serde types for Rust translated from JSON Schema by QuickType."
 license = "Apache-2.0"
 documentation = "https://docs.rs/oci-runtime-spec/latest"
 repository = "https://github.com/glennpratt/oci-runtime-spec-rs"
