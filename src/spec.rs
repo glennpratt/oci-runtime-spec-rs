@@ -24,7 +24,7 @@ pub type DefsWindows = Option<serde_json::Value>;
 pub type Defs = Option<serde_json::Value>;
 
 /// Open Container Initiative Runtime Specification Container Configuration Schema
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct ConfigSchema {
     pub annotations: Option<HashMap<String, Option<serde_json::Value>>>,
     pub hooks: Option<Hooks>,
@@ -41,14 +41,14 @@ pub struct ConfigSchema {
     pub windows: Option<Windows>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Hooks {
     pub poststart: Option<Vec<Hook>>,
     pub poststop: Option<Vec<Hook>>,
     pub prestart: Option<Vec<Hook>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Hook {
     pub args: Option<Vec<String>>,
     pub env: Option<Vec<String>>,
@@ -57,7 +57,7 @@ pub struct Hook {
 }
 
 /// Linux platform-specific configurations
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Linux {
     #[serde(rename = "cgroupsPath")]
     pub cgroups_path: Option<String>,
@@ -82,7 +82,7 @@ pub struct Linux {
     pub uid_mappings: Option<Vec<IdMapping>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct LinuxDevice {
     #[serde(rename = "fileMode")]
     pub file_mode: Option<i64>,
@@ -95,7 +95,7 @@ pub struct LinuxDevice {
     pub uid: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct IdMapping {
     #[serde(rename = "containerID")]
     pub container_id: i64,
@@ -104,7 +104,7 @@ pub struct IdMapping {
     pub size: i64,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct IntelRdt {
     #[serde(rename = "closID")]
     pub clos_id: Option<String>,
@@ -114,14 +114,14 @@ pub struct IntelRdt {
     pub mem_bw_schema: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct NamespaceReference {
     pub path: Option<String>,
     #[serde(rename = "type")]
     pub namespace_reference_type: NamespaceType,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct LinuxResources {
     #[serde(rename = "blockIO")]
     pub block_io: Option<BlockIo>,
@@ -135,7 +135,7 @@ pub struct LinuxResources {
     pub rdma: Option<HashMap<String, Rdma>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct BlockIo {
     #[serde(rename = "leafWeight")]
     pub leaf_weight: Option<i64>,
@@ -152,14 +152,14 @@ pub struct BlockIo {
     pub weight_device: Option<Vec<BlockIoDeviceWeight>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct BlockIoDeviceThrottle {
     pub major: i64,
     pub minor: i64,
     pub rate: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct BlockIoDeviceWeight {
     pub major: i64,
     pub minor: i64,
@@ -168,7 +168,7 @@ pub struct BlockIoDeviceWeight {
     pub weight: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct PurpleCpu {
     pub cpus: Option<String>,
     pub mems: Option<String>,
@@ -181,7 +181,7 @@ pub struct PurpleCpu {
     pub shares: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct DeviceCgroup {
     pub access: Option<String>,
     pub allow: bool,
@@ -191,14 +191,14 @@ pub struct DeviceCgroup {
     pub device_cgroup_type: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct HugepageLimit {
     pub limit: i64,
     #[serde(rename = "pageSize")]
     pub page_size: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct PurpleMemory {
     #[serde(rename = "disableOOMKiller")]
     pub disable_oom_killer: Option<bool>,
@@ -211,25 +211,25 @@ pub struct PurpleMemory {
     pub swappiness: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct ResourcesNetwork {
     #[serde(rename = "classID")]
     pub class_id: Option<i64>,
     pub priorities: Option<Vec<NetworkInterfacePriority>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct NetworkInterfacePriority {
     pub name: String,
     pub priority: i64,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Pids {
     pub limit: i64,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Rdma {
     #[serde(rename = "hcaHandles")]
     pub hca_handles: Option<i64>,
@@ -237,7 +237,7 @@ pub struct Rdma {
     pub hca_objects: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Seccomp {
     pub architectures: Option<Vec<SeccompArch>>,
     #[serde(rename = "defaultAction")]
@@ -245,14 +245,14 @@ pub struct Seccomp {
     pub syscalls: Option<Vec<Syscall>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Syscall {
     pub action: SeccompAction,
     pub args: Option<Vec<SyscallArg>>,
     pub names: Vec<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct SyscallArg {
     pub index: i64,
     pub op: SeccompOperators,
@@ -261,7 +261,7 @@ pub struct SyscallArg {
     pub value_two: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Mount {
     pub destination: String,
     pub options: Option<Vec<String>>,
@@ -270,7 +270,7 @@ pub struct Mount {
     pub mount_type: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Process {
     #[serde(rename = "apparmorProfile")]
     pub apparmor_profile: Option<String>,
@@ -291,7 +291,7 @@ pub struct Process {
     pub user: Option<User>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Capabilities {
     pub ambient: Option<Vec<String>>,
     pub bounding: Option<Vec<String>>,
@@ -300,13 +300,13 @@ pub struct Capabilities {
     pub permitted: Option<Vec<String>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct ConsoleSize {
     pub height: i64,
     pub width: i64,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Rlimit {
     pub hard: i64,
     pub soft: i64,
@@ -314,7 +314,7 @@ pub struct Rlimit {
     pub rlimit_type: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct User {
     #[serde(rename = "additionalGids")]
     pub additional_gids: Option<Vec<i64>>,
@@ -324,14 +324,14 @@ pub struct User {
 }
 
 /// Configures the container's root filesystem.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Root {
     pub path: String,
     pub readonly: Option<bool>,
 }
 
 /// Solaris platform-specific configurations
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Solaris {
     pub anet: Option<Vec<Anet>>,
     #[serde(rename = "cappedCPU")]
@@ -344,7 +344,7 @@ pub struct Solaris {
     pub milestone: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Anet {
     #[serde(rename = "allowedAddress")]
     pub allowed_address: Option<String>,
@@ -360,19 +360,19 @@ pub struct Anet {
     pub mac_address: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct CappedCpu {
     pub ncpus: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct CappedMemory {
     pub physical: Option<String>,
     pub swap: Option<String>,
 }
 
 /// configuration for virtual-machine-based containers
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Vm {
     /// hypervisor config used by VM-based containers
     pub hypervisor: Option<Hypervisor>,
@@ -383,21 +383,21 @@ pub struct Vm {
 }
 
 /// hypervisor config used by VM-based containers
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Hypervisor {
     pub parameters: Option<Vec<String>>,
     pub path: String,
 }
 
 /// root image config used by VM-based containers
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct Image {
     pub format: RootImageFormat,
     pub path: String,
 }
 
 /// kernel config used by VM-based containers
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Kernel {
     pub initrd: Option<String>,
     pub parameters: Option<Vec<String>>,
@@ -405,7 +405,7 @@ pub struct Kernel {
 }
 
 /// Windows platform-specific configurations
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Windows {
     #[serde(rename = "credentialSpec")]
     pub credential_spec: Option<HashMap<String, Option<serde_json::Value>>>,
@@ -420,20 +420,20 @@ pub struct Windows {
     pub servicing: Option<bool>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct WindowsDevice {
     pub id: String,
     #[serde(rename = "idType")]
     pub id_type: IdType,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Hyperv {
     #[serde(rename = "utilityVMPath")]
     pub utility_vm_path: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct WindowsNetwork {
     #[serde(rename = "allowUnqualifiedDNSQuery")]
     pub allow_unqualified_dns_query: Option<bool>,
@@ -447,26 +447,26 @@ pub struct WindowsNetwork {
     pub network_shared_container_name: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct WindowsResources {
     pub cpu: Option<FluffyCpu>,
     pub memory: Option<FluffyMemory>,
     pub storage: Option<Storage>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct FluffyCpu {
     pub count: Option<i64>,
     pub maximum: Option<i64>,
     pub shares: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct FluffyMemory {
     pub limit: Option<i64>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Default, PartialEq)]
 pub struct Storage {
     pub bps: Option<i64>,
     pub iops: Option<i64>,
@@ -475,7 +475,7 @@ pub struct Storage {
 }
 
 /// Open Container Runtime State Schema
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct StateSchema {
     pub annotations: Option<HashMap<String, Option<serde_json::Value>>>,
     pub bundle: String,
@@ -487,7 +487,7 @@ pub struct StateSchema {
     pub status: Status,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum NamespaceType {
     #[serde(rename = "cgroup")]
     Cgroup,
@@ -505,7 +505,7 @@ pub enum NamespaceType {
     Uts,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum RootfsPropagation {
     #[serde(rename = "private")]
     Private,
@@ -517,7 +517,7 @@ pub enum RootfsPropagation {
     Unbindable,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum SeccompArch {
     #[serde(rename = "SCMP_ARCH_AARCH64")]
     ScmpArchAarch64,
@@ -557,7 +557,7 @@ pub enum SeccompArch {
     ScmpArchX8664,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum SeccompAction {
     #[serde(rename = "SCMP_ACT_ALLOW")]
     ScmpActAllow,
@@ -571,7 +571,7 @@ pub enum SeccompAction {
     ScmpActTrap,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum SeccompOperators {
     #[serde(rename = "SCMP_CMP_EQ")]
     ScmpCmpEq,
@@ -589,7 +589,7 @@ pub enum SeccompOperators {
     ScmpCmpNe,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum RootImageFormat {
     #[serde(rename = "qcow2")]
     Qcow2,
@@ -603,13 +603,13 @@ pub enum RootImageFormat {
     Vmdk,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum IdType {
     #[serde(rename = "class")]
     Class,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub enum Status {
     #[serde(rename = "created")]
     Created,

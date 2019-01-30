@@ -8,7 +8,7 @@ QuickType[3].
   [2]: https://serde.rs/ "Serde"
   [3]: https://quicktype.io/ "QuickType"
 
-## Update schema
+## Rebuild from schema
 ```
-quicktype -s schema ../runtime-spec/schema/*.json -o src/schema.rs --derive-debug --visibility public --density dense
+make codegen
 ```
