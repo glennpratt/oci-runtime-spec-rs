@@ -1,6 +1,6 @@
 [package]
 name = "oci-runtime-spec"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Glenn Pratt <glennpratt@gmail.com>"]
 edition = "2018"
 description = "OCI Runtime Spec serde types for Rust translated from JSON Schema by QuickType."
@@ -9,6 +9,7 @@ documentation = "https://docs.rs/oci-runtime-spec/latest"
 repository = "https://github.com/glennpratt/oci-runtime-spec-rs"
 
 [dependencies]
+derive_builder = "0.7.0"
 serde = "1.0.85"
 serde_derive = "1.0.85"
 serde_json = "1.0.37"

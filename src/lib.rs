@@ -1,6 +1,9 @@
 #[macro_use]
 extern crate serde_derive;
 
+#[macro_use]
+extern crate derive_builder;
+
 pub mod spec;
 
 #[cfg(test)]
@@ -9,6 +12,20 @@ mod tests {
     use glob::glob;
     use serde_json;
     use std::fs::File;
+
+    #[test]
+    fn builder() -> Result<(), String> {
+        ConfigSchemaBuilder::default()
+            .oci_version("1.0.0")
+            .process(
+                ProcessBuilder::default()
+                    .args(vec!["sleep".to_string(), "1".to_string()])
+                    .cwd("/root")
+                    .build()?,
+            )
+            .build()?;
+        Ok(())
+    }
 
     #[test]
     fn config_good() {
